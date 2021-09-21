@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import Table from "./Table.js";
-
+import SearchBar from "./SearchBar.js";
 function App() {
   /* Create state:
         - apiData: List containing dictionaries of countries from API.
@@ -35,9 +35,21 @@ function App() {
       });
   }, [searchQuery, pageNumber]); // Array containing which state changes that should re-reun useEffect()
 
+function searchthing(){
+//here we need to change searchquery value or state dunno
+const newValue = "af" ;
+return(<div className="place">
+<input type="text" placeholder="search1" onChange={event => {setSearchQuery(event.target.value)}}/>
+</div>
+);
+//onChange={event => {setSearchQuery(event.target.value)}}
+  console.log("aaaa");
+}
   return (
     <div className="App">
       <h1>Country lookup</h1>
+      {searchthing()}
+      <SearchBar/>
       <Table apiData={apiData} />
     </div>
   );
