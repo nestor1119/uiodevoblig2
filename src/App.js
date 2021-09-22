@@ -12,16 +12,16 @@ function App() {
   const [apiData, setApiData] = useState([]);
   const [searchQuery, setSearchQuery] = useState(); // Default = No search query
   const [pageNumber, setPageNumber] = useState(1); //Default = Page 1
-
+  const [pageSize, setPageSize] = useState(10);//default = 10 entries per page
   useEffect(() => {
     // All parameters are appended to this URL.
     let apiQuery = "https://dhis2-app-course-api.ifi.uio.no/api?";
-
+    //add pageSize to the api request
+    apiQuery = apiQuery + "pageSize=" + pageSize;
     // If searchQuery isn't empty add &search=searchQuery to the API request.
     if (searchQuery) {
       apiQuery = apiQuery + "&search=" + searchQuery;
     }
-
     // Add what page we are requesting to the API request.
     apiQuery = apiQuery + "&page=" + pageNumber;
 
@@ -33,17 +33,32 @@ function App() {
         // Then add response to state.
         setApiData(data);
       });
-  }, [searchQuery, pageNumber]); // Array containing which state changes that should re-reun useEffect()
+  }, [searchQuery, pageNumber, pageSize]); // Array containing which state changes that should re-reun useEffect()
 
 function searchthing(){
 //here we need to change searchquery value or state dunno
-const newValue = "af" ;
-return(<div className="place">
+return(<div className="placehold">
 <input type="text" placeholder="search1" onChange={event => {setSearchQuery(event.target.value)}}/>
+<button className="searchButton1">Search</button>
 </div>
 );
-//onChange={event => {setSearchQuery(event.target.value)}}
+//<input type="text" placeholder="results per page" onChange={event => {setPageSize(event.target.value)}}/>
+
+
   console.log("aaaa");
+}
+
+function howManyPerPage(){
+return(
+  <div ClassName = "howManyPerPageBox">
+  <select name="perPage" id="entries" onChange={event => {setPageSize(event.target.value)}}>
+  <option value="10">10</option>
+  <option value="30">30</option>
+  <option value="50">50</option>
+</select>
+  </div>
+
+);
 }
   return (
     <div className="App">
@@ -51,6 +66,8 @@ return(<div className="place">
       {searchthing()}
       <SearchBar/>
       <Table apiData={apiData} />
+      {howManyPerPage()}
+
     </div>
   );
 }
