@@ -37,15 +37,17 @@ function App() {
 
 function searchthing(){
 //here we need to change searchquery value or state dunno
+let searchInputValue = "n";
+console.log(searchInputValue);
 return(<div className="placehold">
-<input type="text" placeholder="search1" onChange={event => {setSearchQuery(event.target.value)}}/>
-<button className="searchButton1">Search</button>
+<input type="text" placeholder="search1" onChange={event => {searchInputValue= event.target.value}}/>
+<button className="searchButton1" onClick= {event =>{setSearchQuery(searchInputValue)}}>Search</button>
 </div>
 );
 //<input type="text" placeholder="results per page" onChange={event => {setPageSize(event.target.value)}}/>
 
 
-  console.log("aaaa");
+
 }
 
 function howManyPerPage(){
