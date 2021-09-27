@@ -39,32 +39,22 @@ function App() {
   }, [searchQuery, pageNumber, pageSize]); // Array containing which state changes that should re-reun useEffect()
 
 
-
+//task 2
 function SearchBarFunc(value){
   console.log(value);
   console.log(searchQuery);
+  //changes searchquery value to what user wrote
   setSearchQuery(value);
 }
 
-function howManyPerPage(){
-return(
-  <div ClassName = "howManyPerPageBox">
-  <select name="perPage" id="entries" onChange={event => {setPageSize(event.target.value)}}>
-  <option value="10">10</option>
-  <option value="30">30</option>
-  <option value="50">50</option>
-</select>
-  </div>
-
-);
-}
+//task 3
 function Entryperpagefunc(entriesVal){
   console.log(entriesVal);
   setPageSize(entriesVal);
 
 }
 
-
+//task 4
 function PaginationFunc(numb){
   console.log(numb);
   console.log(pageNumber);
@@ -85,7 +75,7 @@ else if (numb == "1") {
 
       <SearchBar navn={SearchBarFunc}/>
       <Table apiData={apiData} />
-      
+
       <EntryPerPage place={Entryperpagefunc}/>
       <Pagination pagenum={PaginationFunc}
       pageNumber={pageNumber}
