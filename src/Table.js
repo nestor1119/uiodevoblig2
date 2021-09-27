@@ -1,6 +1,6 @@
 function Table(props) {
-  console.log(props.apiData);
-
+  //console.log(props.apiData);
+//console.log(props.apiData.results);
   if (!props.apiData.results) {
     // If the API request isn't completed return "loading...""
     return <p>Loading...</p>;
@@ -8,7 +8,7 @@ function Table(props) {
   } else {
     const countries = props.apiData.results;
     const countriesJSX = countries.map((country) =>{
-      console.log(country);
+      //console.log(country);
       return(
         <tr>
           <td>{country.Country}</td>

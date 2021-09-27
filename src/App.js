@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import Table from "./Table.js";
 import SearchBar from "./SearchBar.js";
+import EntryPerPage from "./EntryPerPage.js"
+import Pagination from "./Pagination.js";
 function App() {
   /* Create state:
         - apiData: List containing dictionaries of countries from API.
@@ -27,6 +29,7 @@ function App() {
 
     // Query data from API.
     console.log("Querying: " + apiQuery);
+
     fetch(apiQuery)
       .then((results) => results.json())
       .then((data) => {
@@ -35,19 +38,12 @@ function App() {
       });
   }, [searchQuery, pageNumber, pageSize]); // Array containing which state changes that should re-reun useEffect()
 
-function searchthing(){
-//here we need to change searchquery value or state dunno
-let searchInputValue = "n";
-console.log(searchInputValue);
-return(<div className="placehold">
-<input type="text" placeholder="search1" onChange={event => {searchInputValue= event.target.value}}/>
-<button className="searchButton1" onClick= {event =>{setSearchQuery(searchInputValue)}}>Search</button>
-</div>
-);
-//<input type="text" placeholder="results per page" onChange={event => {setPageSize(event.target.value)}}/>
 
 
-
+function SearchBarFunc(value){
+  console.log(value);
+  console.log(searchQuery);
+  setSearchQuery(value);
 }
 
 function howManyPerPage(){
@@ -62,13 +58,39 @@ return(
 
 );
 }
+function Entryperpagefunc(entriesVal){
+  console.log(entriesVal);
+  setPageSize(entriesVal);
+
+}
+
+
+function PaginationFunc(numb){
+  console.log(numb);
+  console.log(pageNumber);
+if(numb == "2"){
+  setPageNumber(pageNumber+1);
+                }
+else if (numb == "1") {
+  setPageNumber(pageNumber-1);
+}
+
+}
+
+
+
   return (
     <div className="App">
       <h1>Country lookup</h1>
-      {searchthing()}
-      <SearchBar/>
+
+      <SearchBar navn={SearchBarFunc}/>
       <Table apiData={apiData} />
-      {howManyPerPage()}
+      
+      <EntryPerPage place={Entryperpagefunc}/>
+      <Pagination pagenum={PaginationFunc}
+      pageNumber={pageNumber}
+      totPages={apiData.pager}/>
+
 
     </div>
   );
